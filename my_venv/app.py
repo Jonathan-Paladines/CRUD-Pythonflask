@@ -20,8 +20,10 @@ def index():
     conn=mysql.connect()
     cursor=conn.cursor()
     cursor.execute(sql)
+    empleados=cursor.fetchall()
+    print(empleados)
     conn.commit()
-    return render_template('personal/index.html')
+    return render_template('personal/index.html', empleados=empleados)
 
 @app.route('/creacion')
 def creacion():
@@ -37,7 +39,7 @@ def almacenamiento():
     _imagen=request.files['txtimagen']
     
     ahora=datetime.now()
-    tiempo=now.strftime("%Y%H%M%S")
+    tiempo=ahora.strftime("%Y%H%M%S")
     
     if _imagen.filename!='':
         nuevoNombreImagen=tiempo+_imagen.filename

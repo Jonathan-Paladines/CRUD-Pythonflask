@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <title>Index - Flask - Jonathan Paladines</title>
+    </head>
+    <body>
+        <h1>Hola a todos - Con Flask</h1><br>
+        <table class="table table-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th>                                        
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleados in empleados%}
+                <tr>
+                    <td>{{empleados[0]}}</td>
+                    <td>{{empleados[1]}}</td>
+                    <td>{{empleados[2]}}</td>
+                    <td>{{empleados[3]}}</td>
+                    <td>{{empleados[4]}}</td>
+                    <td>{{empleados[5]}}</td>
+                    <td>Editar | Borrar</td>
+                </tr>
+                {% endfor%}
+                <tr>
+                    <td scope="row"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>
