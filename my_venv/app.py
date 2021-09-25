@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flaskext.mysql import MySQL
 from datetime import datetime
 
@@ -9,13 +9,13 @@ mysql=MySQL()
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
 app.config['MYSQL_DATABASE_PASSWORD']=''
-app.config['MYSQL_DATABASE_DB']='crud-empleados'
-app.config['MYSQL_DATABASE_PORT']=3310
+app.config['MYSQL_DATABASE_DB']='sistema_empleados'
+app.config['MYSQL_DATABASE_PORT']=3306
 mysql.init_app(app)
 
 @app.route("/")
 def index():
-    sql=' SELECT * FROM personal;'
+    sql=' SELECT * FROM empleados;'
     #sql='INSERT INTO personal (id_persona, nombres, apellidos, Correo, Telefono, Imagen) VALUES ("0987654321", "Estefania", "Sicouret Benites", "estefania.sicouret123456@gmail.com", "0995555555", "foto.jpg");'
     conn=mysql.connect()
     cursor=conn.cursor()
@@ -25,9 +25,19 @@ def index():
     conn.commit()
     return render_template('personal/index.html', empleados=empleados)
 
+@app.route('/destroy/<text:id_persona>')
+def destroy(id):
+    conn=mysql.connect()
+    cursor=conn.cursor()
+    
+    cursor.execute=("DELETE FROM empleados WHERE id=%s")
+    conn.commit()
+    return redirect('/')
+
 @app.route('/creacion')
 def creacion():
     return render_template('personal/creacion.html')
+
 
 @app.route('/store', methods=['POST'])
 def almacenamiento():
@@ -35,7 +45,7 @@ def almacenamiento():
     _nombre=request.form['txtnombre']
     _apellido=request.form['txtapellido']
     _correo=request.form['txtcorreo']
-    _telefono=request.form['txttelefono']
+    #_telefono=request.form['txttelefono']
     _imagen=request.files['txtimagen']
     
     ahora=datetime.now()
@@ -45,10 +55,10 @@ def almacenamiento():
         nuevoNombreImagen=tiempo+_imagen.filename
         _imagen.save("uploads/"+nuevoNombreImagen)
     
-    datos=(_cedula,_nombre,_apellido,_correo,_telefono,nuevoNombreImagen)
+    datos=(_cedula,_nombre,_apellido,_correo,nuevoNombreImagen)
     
     #sql=' SELECT * FROM personal;'
-    sql='INSERT INTO personal (id_persona, nombres, apellidos, Correo, Telefono, Imagen) VALUES (%s, %s, %s, %s, %s, %s);'
+    sql='INSERT INTO empleados (id_persona, nombres, apellidos, correo, im_persona) VALUES (%s, %s, %s, %s, %s);'
     conn=mysql.connect()
     cursor=conn.cursor()
     cursor.execute(sql,datos)

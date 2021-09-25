@@ -15,7 +15,7 @@
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Correo</th>
-                    <th>Telefono</th>
+                    <!--<th>Telefono</th>-->
                     <th>Imagen</th>
                     <th>Acciones</th>                                        
                 </tr>
@@ -28,8 +28,9 @@
                     <td>{{empleados[2]}}</td>
                     <td>{{empleados[3]}}</td>
                     <td>{{empleados[4]}}</td>
-                    <td>{{empleados[5]}}</td>
-                    <td>Editar | Borrar</td>
+                    <!--<td>{{empleados[5]}}</td>-->
+                    <td>Editar | <a href="/destroy/{{empleados[0]}}">Borrar</a>
+                    </td>
                 </tr>
                 {% endfor%}
                 <tr>
