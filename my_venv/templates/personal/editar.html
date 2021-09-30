@@ -1,0 +1,43 @@
+Formulario para editar
+
+{% for empleados in empleados %}
+
+
+{{ empleados[1] }}
+{{ empleados[2] }}
+{{ empleados[3] }}
+{{ empleados[4] }}
+{{ empleados[5] }}
+
+<form method="post" action="/actualizar" enctype="multipart/form-data" style="text-align:center">
+    <div class="container">
+        <div class="row">
+
+            <h1>Formulario de Actualización</h1><br><br>
+            Cedula:<br>
+            <input type="text" value="{{ empleados[0] }}" name="txtcedula" id="txtcedula" placeholder="Documento de Identidad">
+            <br><br>
+            Nombre:<br>
+            <input type="text" value="{{ empleados[1] }}" name="txtnombre" id="txtnombre" placeholder="Nombres">
+            <br><br>
+            Apellido:<br>
+            <input type="text" value="{{ empleados[2] }}" name="txtapellido" id="txtapellido" placeholder="Apellidos">
+            <br><br>
+            Correo:<br>
+            <input type="text" value="{{ empleados[3] }}" name="txtcorreo" id="txtcorreo" placeholder="Correo">
+            <br><br>
+            <!--Telefono:<br>
+            <input type="text" name="txttelefono" id="txttelefono" placeholder="Telefono">
+            <br><br>-->
+            Imagen: <br>
+            value="{{ empleados[4] }}"
+            <input type="file" value="{{ empleados[4] }}" name="txtimagen" id="txtimagen" placeholder="Imagen">
+            <br>
+            <br>
+            <input type="submit" value="Agregar"
+        </div>
+    </div>
+</form>
+
+{% endfor %}
+
